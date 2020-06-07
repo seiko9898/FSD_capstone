@@ -70,10 +70,3 @@ class Actor(db.Model):
         }
 
 
-class Actor_Movie(db.Model):
-    __tablename__ = 'actor_movie'
-    id = Column(Integer, primary_key=True)
-    movie_id = Column(Integer, ForeignKey('movie.id'))
-    actor_id = Column(Integer, ForeignKey('actor.id'))
-
-

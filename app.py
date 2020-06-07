@@ -11,11 +11,11 @@ def create_app(test_config=None):
     setup_db(app)
     CORS(app)
 
-
     @app.route('/')
     def hello_world():
         return 'Welcome: This is my FSND Casting App.'
 
+    # Implementing the end points
     @app.route('/actors', methods=["POST"])
     @requires_auth('post:actor')
     def post_actor(token):
@@ -144,6 +144,7 @@ def create_app(test_config=None):
         except Exception:
             abort(422)
 
+    # Implementing the error handlers
     @app.errorhandler(404)
     def not_found(error):
         return jsonify({

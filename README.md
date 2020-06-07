@@ -21,7 +21,7 @@ source env/bin/activate
 With python installed and virtual environment created, run the following command to install all the dependencies:
 
 ```bash
-pip install foobar
+pip install -r requirements.txt
 ```
 
 **Flask**: Flask is a micro web framework written in Python. Flask supports extensions that can add application features as if they were implemented in Flask itself.
@@ -41,9 +41,7 @@ To create a Postgres Database run:
 createdb casting
 ```
 
-### Hosting
-
-### Locally
+### Hosting Locally
 To run the local server run the following commands from the source directory:
 ```bash
 export FLASK_APP=app.py
@@ -51,13 +49,18 @@ export FLASK_ENV=development
 flask run
 ```
 
-### On Cloud
+### Cloud Hosting
 
 The app is hosted on Heroku under:
 
 https://casting9898.herokuapp.com/
 
+## Running Tests
 
+THE JWT in the test_App.py have to be filled in with a valid JWT. From the source folder run the following commands:
+```bash
+python test_app.py
+```
 ## Backend
 
 ### Models
@@ -68,13 +71,13 @@ https://casting9898.herokuapp.com/
 
 **Casting Assistant**: Can view actors and movies
 
-**Casting Director**All permissions a Casting Assistant has and…
+**Casting Director**: All permissions a Casting Assistant has and…
 
 Add or delete an actor from the database
 
 Modify actors or movies
 
-**Executive Producer**All permissions a Casting Director has and…
+**Executive Producer**: All permissions a Casting Director has and…
 
 Add or delete a movie from the database
 
@@ -157,7 +160,7 @@ A JSON object of all the actors in the database.
 **PATCH /movies**
 ```bash
 curl --location --request POST 'https://casting9898.herokuapp.com/movies/1' \
--H"Content-Type: application/json" -d'{"title":"Ocean 11", "release_date":"2020-01-01"}' \
+-H"Content-Type: application/json" -d'{"title":"Matrix", "release_date":"2005-01-01"}' \
 --header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
 ```
 
