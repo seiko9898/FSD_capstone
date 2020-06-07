@@ -13,7 +13,8 @@ def create_app(test_config=None):
 
     @app.route('/')
     def hello_world():
-        return redirect('https://seiko.eu.auth0.com/authorize?audience=casting&response_type=token&client_id=pIl68811faWRCqd1VY1IQ69Q0q7xctvz&redirect_uri=https://casting9898.herokuapp.com/', code=302)
+        return ('Welcome to my FSND Casting Application.')
+        #return redirect('https://seiko.eu.auth0.com/authorize?audience=casting&response_type=token&client_id=pIl68811faWRCqd1VY1IQ69Q0q7xctvz&redirect_uri=https://casting9898.herokuapp.com/', code=302)
 
     # Implementing the end points
     @app.route('/actors', methods=["POST"])
