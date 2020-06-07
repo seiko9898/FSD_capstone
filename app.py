@@ -11,11 +11,10 @@ def create_app(test_config=None):
     setup_db(app)
     CORS(app)
 
-    '''
+
     @app.route('/')
     def hello_world():
-        return 'Hello_world'
-    '''
+        return 'Welcome: This is my FSND Casting App.'
 
     @app.route('/actors', methods=["POST"])
     @requires_auth('post:actor')

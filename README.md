@@ -41,8 +41,9 @@ To create a Postgres Database run:
 createdb casting
 ```
 
-### Hosting Instructions
+### Hosting
 
+### Locally
 To run the local server run the following commands from the source directory:
 ```bash
 export FLASK_APP=app.py
@@ -50,13 +51,20 @@ export FLASK_ENV=development
 flask run
 ```
 
+### On Cloud
+
+The app is hosted on Heroku under:
+
+https://casting9898.herokuapp.com/
+
+
 ## Backend
 
 ### Models
 **Actor**: The database table Actor has attributes name, age and gender
 **Movie**: The database table Movie has attributes title and release date
 
-### Roles:
+### RBAC Roles:
 
 **Casting Assistant**: Can view actors and movies
 
@@ -73,53 +81,96 @@ Add or delete a movie from the database
 ### API Endpoints
 
 **GET /actors**
-curl --location --request GET 'https://castingagencyfsnd.herokuapp.com/movies' \
---header 'Authorization: Bearer '
 
 ```bash
 curl --location --request GET 'https://casting9898.herokuapp.com/actors' \
 --header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
 ```
-Returns
+Returns:
 
-```bash
-{
-  "actors": [
-    {
-      "age": 45, 
-      "gender": "male", 
-      "id": 1, 
-      "name": "brad pitt"
-    }
-  ], 
-  "success": true
-}
-```
+A JSON object of all the actors in the database.
 
 **GET /movies**
+```bash
+curl --location --request GET 'https://casting9898.herokuapp.com/movies' \
+--header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
+```
+
+Returns:
+
+A JSON object of all the movies in the database.
 
 **DELETE /actors**
+```bash
+curl --location --request DELETE 'https://casting9898.herokuapp.com/actors/1' \
+--header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
+```
+
+Returns:
+
+A JSON object of all the actors in the database.
 
 **DELETE /movies**
+```bash
+curl --location --request DELETE 'https://casting9898.herokuapp.com/movies/1' \
+--header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
+```
+
+Returns:
+
+A JSON object of all the movies in the database.
 
 **POST /actors**
 
 ```bash
-{
-  "actors": [
-    {
-      "age": 45, 
-      "gender": "male", 
-      "id": 1, 
-      "name": "brad pitt"
-    }
-  ], 
-  "success": true
-}
+curl --location --request POST 'https://casting9898.herokuapp.com/actors' \
+application/json" -d'{"name":"Angelina Jolie", "age":"40", "gender":"Female"}' \
+--header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
 ```
 
+Returns:
+
+A JSON object of all the actors in the database.
+
 **POST /movies**
+```bash
+curl --location --request POST 'https://casting9898.herokuapp.com/movies' \
+-H"Content-Type: application/json" -d'{"title":"Fury", "release_date":"2019-01-01"}' \
+--header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
+```
+
+Returns:
+
+A JSON object of all the movies in the database.
 
 **PATCH /actors**
+```bash
+curl --location --request POST 'https://casting9898.herokuapp.com/actors/1' \
+application/json" -d'{"name":"Brad Pitt", "age":"50", "gender":"Male"}' \
+--header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
+```
+
+Returns:
+
+A JSON object of all the actors in the database.
 
 **PATCH /movies**
+```bash
+curl --location --request POST 'https://casting9898.herokuapp.com/movies/1' \
+-H"Content-Type: application/json" -d'{"title":"Ocean 11", "release_date":"2020-01-01"}' \
+--header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
+```
+
+Returns:
+
+A JSON object of all the movies in the database.
+
+## Error handlers
+
+The following error handlers have been implemented:
+
+**422**: Unprocessible
+
+**404**: Not Found
+
+**Auth Error**: Authorization or permission errors
