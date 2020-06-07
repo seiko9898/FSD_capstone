@@ -9,6 +9,7 @@ database_name = "casting"
 database_path = "postgres://ucejfccbbzvkjo:0968201613aaae144435948fa46f5fa4264c5bb5b708aed78c114320da58026d@ec2-52-7-39-178.compute-1.amazonaws.com:5432/df5al5nci0lgp8"
 db = SQLAlchemy()
 
+
 def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -17,6 +18,7 @@ def setup_db(app, database_path=database_path):
     #db.drop_all()
     #db.create_all()
     migrate = Migrate(app, db)
+
 
 class Movie(db.Model):
     __tablename__ = 'movie'
@@ -65,8 +67,6 @@ class Actor(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'age':self.age,
+            'age': self.age,
             'gender': self.gender
         }
-
-

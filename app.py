@@ -5,6 +5,7 @@ from flask_cors import CORS
 from models import setup_db, Movie, Actor
 from auth import AuthError, requires_auth
 
+
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__)
@@ -84,7 +85,7 @@ def create_app(test_config=None):
         except Exception:
             abort(422)
 
-    @app.route('/movies',methods=["GET"])
+    @app.route('/movies', methods=["GET"])
     @requires_auth('get:movies')
     def get_movies(token):
         all_movies = [movie.format() for movie in Movie.query.all()]
@@ -95,7 +96,7 @@ def create_app(test_config=None):
             "movies": all_movies
         })
 
-    @app.route('/actors',methods=["GET"])
+    @app.route('/actors', methods=["GET"])
     @requires_auth('get:actors')
     def get_actors(token):
         all_actors = [actor.format() for actor in Actor.query.all()]
@@ -151,22 +152,21 @@ def create_app(test_config=None):
         return jsonify({
             "success": False,
             "error": 404,
-            "message": "Not found"
-        }), 404
+            "message": "Not found"}), 404
 
     @app.errorhandler(422)
     def unprocessible(error):
         return jsonify({
             "success": False,
             'error': 422,
-            'message': 'unprocessible'}),422
+            'message': 'unprocessible'}), 422
 
     @app.errorhandler(401)
     def unauthorized(error):
         return jsonify({
             "success": False,
             'error': 401,
-            'message': 'unauthorized'}),401
+            'message': 'unauthorized'}), 401
 
     @app.errorhandler(AuthError)
     def handle_auth_error(ex):
@@ -176,7 +176,9 @@ def create_app(test_config=None):
 
     return app
 
+
 app = create_app()
+
 
 if __name__ == '__main__':
     APP.run(host='0.0.0.0', port=8080, debug=True)

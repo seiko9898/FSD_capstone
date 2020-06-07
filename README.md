@@ -44,6 +44,7 @@ createdb casting
 ### Hosting Locally
 To run the local server run the following commands from the source directory:
 ```bash
+source setup.sh
 export FLASK_APP=app.py
 export FLASK_ENV=development
 flask run
@@ -84,68 +85,32 @@ Add or delete a movie from the database
 
 ### API Endpoints
 
-**GET /actors**
-
-```bash
-curl --location --request GET 'https://casting9898.herokuapp.com/actors' \
---header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
-```
-Returns:
-
-A JSON object of all the actors in the database.
-
-**GET /movies**
-```bash
-curl --location --request GET 'https://casting9898.herokuapp.com/movies' \
---header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
-```
-
-Returns:
-
-A JSON object of all the movies in the database.
-
-**DELETE /actors**
-```bash
-curl --location --request DELETE 'https://casting9898.herokuapp.com/actors/1' \
---header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
-```
-
-Returns:
-
-A JSON object of all the actors in the database.
-
-**DELETE /movies**
-```bash
-curl --location --request DELETE 'https://casting9898.herokuapp.com/movies/1' \
---header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
-```
-
-Returns:
-
-A JSON object of all the movies in the database.
-
 **POST /actors**
 
 ```bash
-curl --location --request POST 'https://casting9898.herokuapp.com/actors' \
+curl --location --request POST 'https://casting9898.herokuapp.com/actors/1' \
 application/json" -d'{"name":"Angelina Jolie", "age":"40", "gender":"Female"}' \
 --header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
 ```
 
 Returns:
 
-A JSON object of all the actors in the database.
-
-**POST /movies**
 ```bash
-curl --location --request POST 'https://casting9898.herokuapp.com/movies' \
--H"Content-Type: application/json" -d'{"title":"Fury", "release_date":"2019-01-01"}' \
+{"actors":[{"age":40,"gender":"Female","id":1,"name":"Angelina Jolie"}],"success":true}
+```
+
+**GET /actors**
+
+```bash
+curl --location --request GET 'https://casting9898.herokuapp.com/actors' \
 --header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
 ```
 
 Returns:
+```bash
+{"actors":[{"age":40,"gender":"Female","id":1,"name":"Angelina Jolie"}],"success":true}
+```
 
-A JSON object of all the movies in the database.
 
 **PATCH /actors**
 ```bash
@@ -155,8 +120,44 @@ application/json" -d'{"name":"Brad Pitt", "age":"50", "gender":"Male"}' \
 ```
 
 Returns:
+```bash
+{"actors":[{"age":45,"gender":"male","id":1,"name":"brad pitt"}],"success":true}
+```
 
-A JSON object of all the actors in the database.
+**DELETE /actors**
+```bash
+curl --location --request DELETE 'https://casting9898.herokuapp.com/actors/1' \
+--header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
+```
+
+Returns:
+
+```bash
+{"actors":[],"success":true}
+```
+
+**POST /movies**
+```bash
+curl --location --request POST 'https://casting9898.herokuapp.com/movies' \
+-H"Content-Type: application/json" -d'{"title":"Fury", "release_date":"2019-01-01"}' \
+--header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
+```
+Returns:
+
+```bash
+{"movies":[{"id":1,"release_date":"Tue, 01 Jan 2019 00:00:00 GMT","title":"Fury"}],"success":true}
+```
+
+**GET /movies**
+```bash
+curl --location --request GET 'https://casting9898.herokuapp.com/movies' \
+--header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
+```
+
+Returns:
+```bash
+{"movies":[{"id":1,"release_date":"Tue, 01 Jan 2019 00:00:00 GMT","title":"Fury"}],"success":true}
+```
 
 **PATCH /movies**
 ```bash
@@ -165,9 +166,22 @@ curl --location --request POST 'https://casting9898.herokuapp.com/movies/1' \
 --header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
 ```
 
+Returns
+```bash
+{"movies":[{"id":1,"release_date":"Sat, 01 Jan 2005 00:00:00 GMT","title":"Matrix"}],"success":true}
+```
+
+**DELETE /movies**
+```bash
+curl --location --request DELETE 'https://casting9898.herokuapp.com/movies/1' \
+--header 'Authorization: Bearer YOUR_VALID_JWT_TOKEN'
+```
+
 Returns:
 
-A JSON object of all the movies in the database.
+```bash
+{"movies":[],"success":true}
+```
 
 ## Error handlers
 
