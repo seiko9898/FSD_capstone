@@ -65,6 +65,7 @@ python test_app.py
 
 ### Models
 **Actor**: The database table Actor has attributes name, age and gender
+
 **Movie**: The database table Movie has attributes title and release date
 
 ### RBAC Roles:
